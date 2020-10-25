@@ -14,6 +14,8 @@ class BotMessage(object):
                   "[cd CHILDIRNAME]\n" \
                   '[ls] show all files and directories in current directory\n' \
                   "[mkdir DIRNAME] Create directory in current directory with name = DIRNAME\n" \
-                  "[rmdir ----]\n"
+                  "[rmdir [full] or [dir]] full delete with all component\n"
 
         return message
+
+

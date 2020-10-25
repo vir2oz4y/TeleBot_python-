@@ -1,9 +1,12 @@
 import os
+from Commands.CommandLs import CommandLs
+
 
 class CommandCd(object):
     def __init__(self, pathInfo, addition):
         self.pathInformation = pathInfo
         self.addition = addition
+        self.commandLs = None
         # this array of type of commands Cd
         self.commands = [CdIntoFirstDir(self.pathInformation.getCurrentDir()),
                          CdIntoParentDir(self.pathInformation.getCurrentDir()),
@@ -18,9 +21,16 @@ class CommandCd(object):
             else:
                 self.pathInformation.setCurrentDir(result)
                 self.pathInformation.setCommandResult("Command is done")
+
+                self.commandLs = CommandLs(self.pathInformation)  # TODO insert into pathInfo directories and files
+                self.pathInformation = self.commandLs.Run()
                 return self.pathInformation
+
         # if Command is not done
         self.pathInformation.setCommandResult("Command is not done")
+
+
+
         return self.pathInformation
 
 
@@ -35,7 +45,7 @@ class CdIntoFirstDir(object):
         return None
 
     def CreatePathToFirstDir(self):  # TODO replace current directory to new first directory
-        indexOfFirst = self.path.find('\\') + '\\'
+        indexOfFirst = self.path.find('\\')
         if indexOfFirst != -1:  # if any error in find
             newCurrentDir = self.path[0: indexOfFirst + 1]
             return newCurrentDir  # +1 to add \\

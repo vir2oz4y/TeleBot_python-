@@ -8,8 +8,8 @@ class CommandController(object):
     commands = {}
 
     def __init__(self, dataToCommand):
-        self.command = dataToCommand.command.trim()
-        self.addition = dataToCommand.addition.trim()
+        self.command = dataToCommand.command
+        self.addition = dataToCommand.addition
         self.pathInfo = dataToCommand.pathInfo
         self.IntoCommand()
 
@@ -27,6 +27,7 @@ class CommandController(object):
     def Start(self):  # TODO get value from dict and RUN this
         if self.CheckCommand():
             self.pathInfo = self.commands.get(self.command).Run()
+            self.pathInfo = self.commands.get('ls').Run()
 
     def GetNewPathInfo(self):
         return self.pathInfo

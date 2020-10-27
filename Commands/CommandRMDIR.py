@@ -15,15 +15,15 @@ class CommandRMDIR(object):
 
     def DeleteDirWithAllFiles(self):
         try:
-            if self.addition is None:
+            if self.addition is None:  # if directory name is None, delete directory there we us
                 shutil.rmtree(self.pathInformation.getCurrentDir())
                 self.pathInformation.setCommandResult("Directory was delete")
                 CommandCd(self.pathInformation, '..').Run()
 
-            else:
+            else:  # id directory name exists
                 shutil.rmtree(self.pathInformation.getCurrentDir() + self.addition)
                 self.pathInformation.setCommandResult("Directory was delete")
 
-        except:
+        except:  # if any errors
             self.pathInformation.setCommandResult("Directory wasn't delete")
 

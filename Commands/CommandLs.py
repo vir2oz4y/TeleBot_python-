@@ -1,4 +1,6 @@
+import json
 import os
+import codecs
 
 class CommandLs(object):
     def __init__(self, pathInfo):
@@ -22,7 +24,8 @@ class CommandLs(object):
     def __AddFilesAndDirIntoPathInfo(self):
         files = []
         directories = []
-        for file in self.__GetAllInDirectories():  # TODO Проходим по всем элементам и находим директории и файлы
+        allFilesAndDirs = self.__GetAllInDirectories()
+        for file in allFilesAndDirs:  # TODO Проходим по всем элементам и находим директории и файлы
             filePath = self.pathInformation.getCurrentDir() + file
             if self.__IsDirectory(filePath):
                 directories.append(file)
@@ -31,11 +34,13 @@ class CommandLs(object):
         self.pathInformation.setFiles(files)  # TODO add files into PathInformation
         self.pathInformation.setDirectories(directories)  # TODO add directories into PathInformation
 
+
     def __IsDirectory(self, fileName):
         if os.path.isdir(fileName):
             return True
         else:
             return False
+
 
     def __IsFile(self, fileName):
         if os.path.isfile(fileName):

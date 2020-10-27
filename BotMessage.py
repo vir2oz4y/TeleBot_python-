@@ -18,4 +18,14 @@ class BotMessage(object):
 
         return message
 
-
+    @staticmethod
+    def MessageFromAPI(pathInfo):
+        message = "{resultCommand}\n" \
+                  "--> {path}\n" \
+                  "files - {files}\n" \
+                  "directories - {dirs}\n" \
+                  "".format(resultCommand=pathInfo.getCommandResult(),
+                            path=pathInfo.getCurrentDir(),
+                            files=pathInfo.getFiles(),
+                            dirs=pathInfo.getDirs())
+        return message

@@ -1,4 +1,5 @@
 from Commands.CommandCd import CommandCd
+from Commands.CommandGFILE import CommandGFILE
 from Commands.CommandLs import CommandLs
 from Commands.CommandMKDIR import CommandMKDIR
 from Commands.CommandRMDIR import CommandRMDIR
@@ -7,17 +8,19 @@ from Commands.CommandRMDIR import CommandRMDIR
 class CommandController(object):
     commands = {}
 
-    def __init__(self, dataToCommand):
+    def __init__(self, dataToCommand, bot):
         self.command = dataToCommand.command
         self.addition = dataToCommand.addition
         self.pathInfo = dataToCommand.pathInfo
+        self.bot = bot
         self.IntoCommand()
 
     def IntoCommand(self):  # TODO create dict of command
         self.commands = {'cd': CommandCd(self.pathInfo, self.addition),
                          'ls': CommandLs(self.pathInfo),
                          'mkdir': CommandMKDIR(self.pathInfo, self.addition),
-                         'rmdir': CommandRMDIR(self.pathInfo, self.addition)}
+                         'rmdir': CommandRMDIR(self.pathInfo, self.addition),
+                         "gfile":CommandGFILE(self.bot, self.pathInfo, self.addition)}
 
     def CheckCommand(self):  # TODO check what input command is exists
         if self.command in self.commands.keys():
